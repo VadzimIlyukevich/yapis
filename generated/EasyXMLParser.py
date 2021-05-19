@@ -182,7 +182,7 @@ class EasyXMLParser ( Parser ):
     RULE_func_call = 5
     RULE_if_statement = 6
     RULE_if_block = 7
-    RULE_else_if_block = 8
+    RULE_elif_block = 8
     RULE_else_block = 9
     RULE_for_statement = 10
     RULE_while_statement = 11
@@ -198,7 +198,7 @@ class EasyXMLParser ( Parser ):
     RULE_xml = 21
 
     ruleNames =  [ "var_init", "assignment", "sum_assignment", "get", "get_array_element", 
-                   "func_call", "if_statement", "if_block", "else_if_block", 
+                   "func_call", "if_statement", "if_block", "elif_block", 
                    "else_block", "for_statement", "while_statement", "func_init", 
                    "type_cast", "range_statement", "condition", "params", 
                    "param", "expression", "get_operation", "operation", 
@@ -792,11 +792,11 @@ class EasyXMLParser ( Parser ):
             return self.getTypedRuleContext(EasyXMLParser.If_blockContext,0)
 
 
-        def else_if_block(self, i:int=None):
+        def elif_block(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(EasyXMLParser.Else_if_blockContext)
+                return self.getTypedRuleContexts(EasyXMLParser.Elif_blockContext)
             else:
-                return self.getTypedRuleContext(EasyXMLParser.Else_if_blockContext,i)
+                return self.getTypedRuleContext(EasyXMLParser.Elif_blockContext,i)
 
 
         def else_block(self):
@@ -829,7 +829,7 @@ class EasyXMLParser ( Parser ):
             _la = self._input.LA(1)
             while _la==EasyXMLParser.ELIF:
                 self.state = 111
-                self.else_if_block()
+                self.elif_block()
                 self.state = 116
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -929,7 +929,7 @@ class EasyXMLParser ( Parser ):
         return localctx
 
 
-    class Else_if_blockContext(ParserRuleContext):
+    class Elif_blockContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -960,21 +960,21 @@ class EasyXMLParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return EasyXMLParser.RULE_else_if_block
+            return EasyXMLParser.RULE_elif_block
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitElse_if_block" ):
-                return visitor.visitElse_if_block(self)
+            if hasattr( visitor, "visitElif_block" ):
+                return visitor.visitElif_block(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def else_if_block(self):
+    def elif_block(self):
 
-        localctx = EasyXMLParser.Else_if_blockContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_else_if_block)
+        localctx = EasyXMLParser.Elif_blockContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_elif_block)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)

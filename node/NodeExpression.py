@@ -7,6 +7,6 @@ class NodeExpression(Node.Node):
         self.value = None
         self.left_expression = None
         self.right_expression = None
-        self.opetor = None
+        self.operator = None
         self.line = line
         self.column = column

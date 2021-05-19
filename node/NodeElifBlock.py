@@ -2,7 +2,7 @@ from . import Node
 
 
 class NodeElifBlock(Node.Node):
-    def __init__(self, condition = None, line: int = 0, column: int = 0):
+    def __init__(self, condition=None, line: int = 0, column: int = 0):
         super().__init__()
         self.condition = condition
         self.line = line
